@@ -74,6 +74,22 @@ RUN wget http://pecl.php.net/get/inotify-2.0.0.tgz -O inotify.tgz \
     ) \
     && rm -r inotify \
     && docker-php-ext-enable inotify
+    
+# 编译安装 yaconf
+RUN wget https://codeload.github.com/laruence/yaconf/zip/master -O yaconf.zip \
+    && mkdir -p inotify \
+    && unzip yaconf.zip  \
+    && rm yaconf.zip  \
+    && ( \
+        cd yaconf-master \
+        && phpize \
+        && ./configure \
+        && make \
+        && make install \
+    ) \
+    && rm -r yaconf-master \
+    && docker-php-ext-enable yaconf
+    && sed -i '$a\yaconf.directory=/var/www/easyswoole/config' /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
 
 
 RUN wget https://codeload.github.com/easy-swoole/easyswoole/zip/3.x -O  easyswoole.zip \
