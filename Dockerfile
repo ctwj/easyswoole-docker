@@ -77,7 +77,6 @@ RUN wget http://pecl.php.net/get/inotify-2.0.0.tgz -O inotify.tgz \
 
 
 RUN wget https://codeload.github.com/easy-swoole/easyswoole/zip/3.x -O  easyswoole.zip \
-    && mkdir pp /var/www \
     && unzip easyswoole.zip -d /var/www \
     && mv /var/www/easyswoole-3.x /var/www/easyswoole
 
