@@ -3,6 +3,7 @@ easyswoole docker image
 
 swoole     => v4.2.13  
 easyswoole => v3.x
+yaconf     => config dir `/var/www/easyswoole/config`
 
 
 # usage
