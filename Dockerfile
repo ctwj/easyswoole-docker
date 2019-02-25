@@ -92,7 +92,7 @@ RUN composer install --no-dev\
 RUN php bin/easyswoole install
 
 # 指定在docker允许时指定的端口进行转发
-EXPOSE 80
+EXPOSE 9501
 
 # 运行容器时执行命令
 CMD ["php", "/var/www/easyswoole/bin/easyswoole", "start", "-d"]
