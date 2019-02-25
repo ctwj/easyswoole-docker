@@ -88,7 +88,7 @@ RUN wget https://codeload.github.com/laruence/yaconf/zip/master -O yaconf.zip \
         && make install \
     ) \
     && rm -r yaconf-master \
-    && docker-php-ext-enable yaconf
+    && docker-php-ext-enable yaconf \
     && sed -i '$a\yaconf.directory=/var/www/easyswoole/config' /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
 
 
