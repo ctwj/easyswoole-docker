@@ -46,7 +46,7 @@ RUN wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz -O hiredis.tar.
     && rm -r hiredis
 
 # 编译安装 swoole
-RUN wget https://github.com/swoole/swoole-src/archive/v4.2.13.tar.gz -O swoole.tar.gz \
+RUN wget https://github.com/swoole/swoole-src/archive/v4.3.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm swoole.tar.gz \
@@ -111,4 +111,4 @@ RUN php bin/easyswoole install
 EXPOSE 9501
 
 # 运行容器时执行命令
-CMD ["php", "/var/www/easyswoole/bin/easyswoole", "start", "-d"]
+CMD ["php", "/var/www/easyswoole/vendor/bin/easyswoole", "start", "-d"]
