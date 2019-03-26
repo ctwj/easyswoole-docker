@@ -46,7 +46,7 @@ RUN wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz -O hiredis.tar.
     && rm -r hiredis
 
 # 编译安装 swoole
-RUN wget https://github.com/swoole/swoole-src/archive/v4.3.0.tar.gz -O swoole.tar.gz \
+RUN wget https://github.com/swoole/swoole-src/archive/v4.3.1.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm swoole.tar.gz \
@@ -92,9 +92,9 @@ RUN wget https://codeload.github.com/laruence/yaconf/zip/master -O yaconf.zip \
     && sed -i '$a\yaconf.directory=/var/www/easyswoole/config' /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
 
 
-RUN wget https://github.com/easy-swoole/easyswoole/archive/3.1.17.zip -O  easyswoole.zip \
+RUN wget https://github.com/easy-swoole/easyswoole/archive/3.1.18.zip -O  easyswoole.zip \
     && unzip easyswoole.zip -d /var/www \
-    && mv /var/www/easyswoole-3.1.17 /var/www/easyswoole
+    && mv /var/www/easyswoole-3.1.18 /var/www/easyswoole
 
 # 进入工作目录
 WORKDIR /var/www/easyswoole
