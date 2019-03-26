@@ -1,8 +1,8 @@
 # easyswoole-docker
 easyswoole docker image
 ```
-swoole     => v4.3.0    
-easyswoole => v3.1.17   
+swoole     => v4.3.1    
+easyswoole => v3.1.18   
 yaconf     => config dir `/var/www/easyswoole/config` 
 ```
 
