@@ -18,7 +18,7 @@ RUN apt-get update \
         libssl-dev \
         libnghttp2-dev \
         php7-gd \
-        php7-opcache
+        php7-opcache \
     && apt-get clean \
     && apt-get autoremove
 
