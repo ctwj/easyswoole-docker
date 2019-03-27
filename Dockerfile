@@ -7,8 +7,10 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone
 
 # 通过apt安装 包
-RUN apt-get update \
-    && apt-get install -y \
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
         vim \
         curl \
         wget \
@@ -17,10 +19,13 @@ RUN apt-get update \
         libz-dev \
         libssl-dev \
         libnghttp2-dev \
-        php7-gd \
-        php7-opcache \
     && apt-get clean \
     && apt-get autoremove
+    
+
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 # 安装 composer
 RUN curl -sS https://getcomposer.org/installer | php \
@@ -31,8 +36,11 @@ RUN curl -sS https://getcomposer.org/installer | php \
 # 安装redis
 RUN pecl install redis && docker-php-ext-enable redis && pecl clear-cache
 
-# 安装 pdo_mysql
-RUN docker-php-ext-install pdo_mysql
+# 安装 pdo_mysql gd iconv
+RUN docker-php-ext-install pdo_mysql  \
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 # 编译安装 hiredis
 RUN wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz -O hiredis.tar.gz \
