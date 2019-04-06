@@ -1,6 +1,6 @@
 FROM php:7.2
 
-MAINTAINER encircles
+MAINTAINER ctwj
 
 # 设置时区
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
         libz-dev \
         libssl-dev \
         libnghttp2-dev \
+        nginx \
     && apt-get clean \
     && apt-get autoremove
 
@@ -112,8 +113,10 @@ RUN composer install --no-dev\
 # easyswoole框架安装
 RUN php bin/easyswoole install
 
+COPY nginx_default /etc/nginx/sites-enabled/default
+
 # 指定在docker允许时指定的端口进行转发
 EXPOSE 9501
 
 # 运行容器时执行命令
-CMD ["php", "/var/www/easyswoole/vendor/bin/easyswoole", "start", "-d"]
+CMD sh -c 'nginx && php bin/easyswoole start -d'
