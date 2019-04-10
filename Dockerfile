@@ -29,8 +29,10 @@ RUN curl -sS https://getcomposer.org/installer | php \
     && composer self-update --clean-backups
     #&& composer config -g repositories.packagist composer https://packagist.phpcomposer.com
 
-# 安装redis
-RUN pecl install redis && docker-php-ext-enable redis && pecl clear-cache
+# 安装redis mongodb
+RUN pecl install redis && docker-php-ext-enable redis \
+    pecl install mongodb && docker-php-ext-enable mongodb \
+    && pecl clear-cache
 
 # 安装 pdo_mysql gd iconv
 RUN docker-php-ext-install pdo_mysql  \
