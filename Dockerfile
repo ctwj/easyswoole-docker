@@ -31,7 +31,7 @@ RUN curl -sS https://getcomposer.org/installer | php \
 
 # 安装redis mongodb
 RUN pecl install redis && docker-php-ext-enable redis \
-    pecl install mongodb && docker-php-ext-enable mongodb \
+    && pecl install mongodb && docker-php-ext-enable mongodb \
     && pecl clear-cache
 
 # 安装 pdo_mysql gd iconv
